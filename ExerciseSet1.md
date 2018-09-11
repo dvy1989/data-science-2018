@@ -24,7 +24,7 @@ elapsed = time.time() - start
 print("Array size: %s MB. Array initialization has taken %.2f sec" % (sys.getsizeof(a) / (1024*1024), elapsed));
 ```
 
-    Array size: 77 MB. Array initialization has taken 2.77 sec
+    Array size: 77 MB. Array initialization has taken 2.08 sec
     
 
 Calculating a summ of arrays:
@@ -41,7 +41,7 @@ elapsed = time.time() - start
 print("Calculating a summ took %.2f sec" % elapsed)
 ```
 
-    Calculating a summ took 1.56 sec
+    Calculating a summ took 1.36 sec
     
 
 Now let's initialize the array with NumPy:
@@ -58,7 +58,7 @@ print("Array size: %s MB. Array initialization has taken %.2f sec" % (sys.getsiz
 b = np.arange(0, 10 ** 7, dtype=np.int32)
 ```
 
-    Array size: 38 MB. Array initialization has taken 0.09 sec
+    Array size: 38 MB. Array initialization has taken 0.08 sec
     
 
 
@@ -70,7 +70,7 @@ elapsed = time.time() - start
 print("Calculating a summ took %.2f sec" % elapsed)
 ```
 
-    Calculating a summ took 0.10 sec
+    Calculating a summ took 0.09 sec
     
 
 So as a result NumPy array took two times less memory. The summ was calculated much faster. Speaking of memory it should be noticed, that used type is int32 (takes 4 bytes). And it also seems that at the current 64 bit machine, Python makes int as int64 (takes 8 bytes). THis is a source of difference. If we test the same code with int64 the result for NumPy will be different:
@@ -80,7 +80,7 @@ So as a result NumPy array took two times less memory. The summ was calculated m
 start = time.time()
 a = np.arange(0, 10 ** 7, dtype=np.int64)
 elapsed = time.time() - start
-print("Array size: %s MB. Array initialization has taken %.2f sec" % (sys.getsizeof(a) / (1024*1024), elapsed));
+print("Array size: %s MB. Array initialization has taken %.2f sec" % (sys.getsizeof(a) / (1024*1024), elapsed))
 
 b = np.arange(0, 10 ** 7, dtype=np.int64)
 
@@ -91,11 +91,28 @@ elapsed = time.time() - start
 print("Calculating a summ took %.2f sec" % elapsed)
 ```
 
-    Array size: 76 MB. Array initialization has taken 0.05 sec
+    Array size: 76 MB. Array initialization has taken 0.04 sec
     Calculating a summ took 0.05 sec
     
 
 Unless size now is almost same as for normal list/array, the time of initialization and calculation is still better.
+
+Out of curiosity let's test NumPy array creation with linspace:
+
+
+```python
+start = time.time()
+a = np.linspace(0, 10 ** 7 - 1, num=10 ** 7, dtype=np.int32)
+print("Array size: %s MB. Array initialization has taken %.2f sec" % (sys.getsizeof(a) / (1024*1024), elapsed))
+
+start = time.time()
+a = np.linspace(0, 10 ** 7 - 1, num=10 ** 7, dtype=np.int64)
+print("Array size: %s MB. Array initialization has taken %.2f sec" % (sys.getsizeof(a) / (1024*1024), elapsed))
+```
+
+    Array size: 38 MB. Array initialization has taken 0.05 sec
+    Array size: 76 MB. Array initialization has taken 0.05 sec
+    
 
 ### Array manipulation
 
