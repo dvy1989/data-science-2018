@@ -341,6 +341,6 @@ positive_reviews.close()
 
 ```
 
-There are some notes on this solution. First, it took a lot of time to complete (about 5 - 7 minutes). This is because fie was read sequentally. A good solution for this might be using Spark. Even locally it should allow to solve the problem faster. Spark is able to work with text files. Then, there are some reviews, where all words were stop words. An example of such review is "lol" (there is indeed such review). It is possble to guess, whether the author liked the game or not, by checking the grade. But the review itself does not contain any valuable information (it is not clear what was funny in the game).
+There are some notes on this solution. First, it took a lot of time to complete (about 7 - 8 minutes). This is because fie was read sequentally. A good solution for this might be using Spark. Even locally it should allow to solve the problem faster. Spark is able to work with text files. Then, there are some reviews, where all words were stop words. An example of such review is "lol" (there is indeed such review). It is possble to guess, whether the author liked the game or not, by checking the grade. But the review itself does not contain any valuable information (it is not clear what was funny in the game).
 
 It is not possible for now say, which words are actively used for positive or negative reviews. Quick glance highlights, that in positive reviews word "really" is used and for negative words like "install" and "research" seem to be quite widely used.
